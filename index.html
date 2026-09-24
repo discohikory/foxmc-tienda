@@ -81,9 +81,12 @@ footer{border-top:1px solid #3a2110;padding:28px 20px;text-align:center;color:#8
     <div style="display:grid;gap:16px;align-content:start">
       <div class="card">
         <h3>🔐 Login</h3>
-        <p class="muted">Usa tu nick de Minecraft antes de comprar.</p>
-        <div style="display:flex;gap:8px;margin-top:8px"><input id="mcNick" placeholder="Tu nick" style="flex:1;background:#0c0c10;border:1px solid #3a2110;border-radius:12px;padding:10px;color:#fff"><button id="loginBtn" class="chip active">Entrar</button></div>
+        <p class="muted">Nick de Minecraft + Discord opcional (para entrega automática).</p>
+        <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap"><input id="mcNick" placeholder="Tu nick" style="flex:1;min-width:140px;background:#0c0c10;border:1px solid #3a2110;border-radius:12px;padding:10px;color:#fff"><button id="loginBtn" class="chip active">Entrar</button></div>
+        <button id="dcBtn" style="margin-top:8px;width:100%;background:#5865F2;color:#fff;border:none;border-radius:12px;padding:10px;font-weight:900;cursor:pointer">🔗 Conectar Discord (opcional)</button>
         <p class="muted" id="loginMsg" style="margin:8px 0 0"></p>
+        <p class="muted" id="dcMsg" style="margin:4px 0 0"></p>
+        <p class="muted" id="dcRemind" style="margin:6px 0 0;display:none;color:#ff6a00">⚠️ Conecta tu Discord para recibir el rango también en Discord.</p>
       </div>
       <div class="card">
         <h3>💬 ¿Necesitas ayuda?</h3>
@@ -133,24 +136,43 @@ footer{border-top:1px solid #3a2110;padding:28px 20px;text-align:center;color:#8
   <div class="total"><div style="display:flex;justify-content:space-between;font-weight:900"><span>Total</span><span id="cartTotal">$0.00</span></div>
   <div class="payicons"><span>PayPal</span><span>MercadoPago</span><span>Stripe</span></div>
   <input id="checkoutNick" placeholder="Tu nick para entrega" style="background:#0c0c10;border:1px solid #3a2110;border-radius:12px;padding:10px;color:#fff">
-  <button class="check" id="checkout">Pagar por Discord</button><button class="check" id="payPal" style="background:#003087">Pagar con PayPal</button></div>
+  <div style="display:grid;gap:8px">
+    <button class="check" id="checkout">Pagar por Discord</button>
+    <button class="check" id="payPal" style="background:#003087;color:#fff">Pagar con PayPal</button>
+    <button class="check" id="daviBtn" style="background:#e30613;color:#fff">Pagar con DaviPlata 🇨🇴</button>
+    <div id="daviBox" style="display:none;background:#0c0c10;border:1px solid #3a2110;border-radius:12px;padding:12px">
+      <b style="font-size:.9rem">DaviPlata Colombia</b><p class="muted" style="margin:6px 0">Transfiere al número del owner y sube comprobante por Discord.</p>
+      <div style="font-family:'JetBrains Mono';font-weight:900;font-size:1.2rem;text-align:center;padding:8px;background:#fff;color:#000;border-radius:10px" id="daviNum">300 000 0000 — configúrame</div>
+    </div>
+  </div>
+  </div>
 </aside>
-<footer>© 2026 FoxMC Network • Tienda Oficial • © Discohikorybrs - Daniel Esteban Vera Fernandez</footer>
+<div id="preview" style="display:none;position:fixed;inset:0;z-index:70;background:rgba(0,0,0,.8);backdrop-filter:blur(8px);place-items:center;padding:20px" onclick="if(event.target===this)closePreview()"><div style="background:#1a0e06;border:1px solid #3a2110;border-radius:22px;max-width:520px;width:100%;padding:22px;text-align:center;animation:pop .3s"><div id="pvEmoji" style="font-size:4rem;animation:float 2s ease-in-out infinite">🦊</div><h3 id="pvTitle">Preview</h3><p class="muted" id="pvDesc"></p><p class="muted" id="pvMods" style="font-family:'JetBrains Mono';font-size:.75rem"></p><button class="buy" style="margin-top:12px" onclick="closePreview()">Cerrar</button></div></div>
+<style>@keyframes pop{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}</style>
+<footer>© 2026 FoxMC Network • Tienda Oficial • © Discohikorybrs - Daniel Esteban Vera Fernandez<br><small class="muted">Tags de países se compran dentro del juego con dinero del servidor ($25.000 en /tags-shop). Kits y cosméticos varían por modalidad.</small></footer>
 
 <script>
-const nickInput=document.getElementById('mcNick'),loginBtn=document.getElementById('loginBtn'),loginMsg=document.getElementById('loginMsg');
+const nickInput=document.getElementById('mcNick'),loginBtn=document.getElementById('loginBtn'),loginMsg=document.getElementById('loginMsg'),dcBtn=document.getElementById('dcBtn'),dcMsg=document.getElementById('dcMsg'),dcRemind=document.getElementById('dcRemind');
 let MC_NICK=localStorage.getItem('fox-mc')||'';
+let DC_ID=localStorage.getItem('fox-dc-id')||'', DC_NAME=localStorage.getItem('fox-dc-name')||'';
+function refreshDiscordUI(){ if(DC_ID){dcMsg.textContent='✔ Discord: '+DC_NAME+' ('+DC_ID+')'; dcBtn.textContent='🔗 Discord conectado'; dcRemind.style.display='none';} else {dcMsg.textContent='Discord opcional — recomendado'; dcRemind.style.display='block'; dcBtn.textContent='🔗 Conectar Discord (opcional)';}}
 if(MC_NICK){nickInput.value=MC_NICK;loginMsg.textContent='Logueado como '+MC_NICK}
+refreshDiscordUI();
+(function(){const h=location.hash;if(h.includes('access_token')){const p=new URLSearchParams(h.substring(1));const t=p.get('access_token');if(t){fetch('https://discord.com/api/users/@me',{headers:{Authorization:'Bearer '+t}}).then(r=>r.json()).then(u=>{DC_ID=u.id;DC_NAME=u.username;localStorage.setItem('fox-dc-id',DC_ID);localStorage.setItem('fox-dc-name',DC_NAME);refreshDiscordUI();history.replaceState(null,'',location.pathname+location.search);}).catch(()=>{});}}})();
 loginBtn.onclick=()=>{const v=nickInput.value.trim();if(!v)return loginMsg.textContent='Escribe tu nick';localStorage.setItem('fox-mc',v);MC_NICK=v;loginMsg.textContent='✔ Logueado como '+v;document.getElementById('checkoutNick').value=v};
+dcBtn.onclick=()=>{const cid='1550618004364988457';const red=encodeURIComponent(location.href.split('#')[0]);location.href=`https://discord.com/oauth2/authorize?client_id=${cid}&response_type=token&redirect_uri=${red}&scope=identify`};
+document.getElementById('daviBtn').onclick=()=>{const b=document.getElementById('daviBox');b.style.display=b.style.display==='none'?'block':'none'};
+window.openPreview=(id)=>{const p=PRODUCTS.find(x=>x.id===id);if(!p)return;const m=document.getElementById('preview');document.getElementById('pvEmoji').textContent=p.emoji;document.getElementById('pvTitle').textContent=p.title;document.getElementById('pvDesc').textContent=p.desc;document.getElementById('pvMods').textContent=(p.mods||[]).join(' • ');m.style.display='grid'};
+window.closePreview=()=>document.getElementById('preview').style.display='none';
 
 const PRODUCTS=[
- {id:'zorro-p',cat:'rango-p',mods:['survival'],emoji:'🦊',title:'ZORRO Permanente',price:{survival:5.99},desc:'Tag ZORRO + kit zorro + 3 homes'},
- {id:'alpha-p',cat:'rango-p',mods:['survival'],emoji:'⭐',title:'ALPHA Permanente',price:{survival:12.99},desc:'ZORRO + fly + partículas'},
- {id:'leyenda-p',cat:'rango-p',mods:['survival'],emoji:'👑',title:'LEYENDA Permanente',price:{survival:22.99},desc:'ALPHA + kits leyenda + prioridad'},
+ {id:'zorro-p',cat:'rango-p',mods:['survival'],emoji:'🦊',title:'ZORRO Permanente',price:{survival:5.99},desc:'Tag ZORRO + kit zorro + 3 homes',preview:'🦊 ZORRO — naranja fuego'},
+ {id:'alpha-p',cat:'rango-p',mods:['survival'],emoji:'⭐',title:'ALPHA Permanente',price:{survival:12.99},desc:'ZORRO + fly + partículas',preview:'⭐ ALPHA — estrella'},
+ {id:'leyenda-p',cat:'rango-p',mods:['survival'],emoji:'👑',title:'LEYENDA Permanente',price:{survival:22.99},desc:'ALPHA + kits leyenda + prioridad',preview:'👑 LEYENDA — máximo'},
  {id:'zorro-t',cat:'rango-t',mods:['survival'],emoji:'⏳',title:'ZORRO 30 días',price:{survival:2.99},desc:'Prueba ZORRO por 30 días'},
  {id:'alpha-t',cat:'rango-t',mods:['survival'],emoji:'⏳',title:'ALPHA 30 días',price:{survival:5.99},desc:'Prueba ALPHA por 30 días'},
- {id:'tag-pais',cat:'cosm',mods:['survival'],emoji:'🏷️',title:'Tag País (COL, ARG…)',price:{survival:1.99},desc:'Tag corto con gradiente del país'},
- {id:'trail',cat:'cosm',mods:['survival'],emoji:'✨',title:'Partículas / Trail',price:{survival:3.49},desc:'Efectos al caminar'},
+ {id:'tag-fox',cat:'cosm',mods:['survival'],emoji:'🦊',title:'Tag ZORRO (exclusivo)',price:{survival:2.49},desc:'Exclusivo Fox — eventos',preview:'🦊 Tag ZORRO'},
+ {id:'trail',cat:'cosm',mods:['survival'],emoji:'✨',title:'Partículas / Trail',price:{survival:3.49},desc:'Efectos al caminar',preview:'✨ Trail corazones'},
  {id:'fly',cat:'cmd',mods:['survival'],emoji:'🪽',title:'/fly',price:{survival:4.99},desc:'Vuelo en tu mundo'},
  {id:'heal',cat:'cmd',mods:['survival'],emoji:'❤️',title:'/heal + /feed',price:{survival:2.99},desc:'Cura y comida'},
  {id:'kit-fox',cat:'kits',mods:['survival'],emoji:'🎒',title:'Kit Zorro',price:{survival:2.99},desc:'Starter zorro'},
@@ -166,7 +188,8 @@ function render(){
  PRODUCTS.filter(p=> (p.mods.includes(MOD)||MOD==='network') && (CAT==='all'||p.cat===CAT)).forEach(p=>{
   const pr=priceOf(p);
   const d=document.createElement('div');d.className='pcard';
-  d.innerHTML=`<div class="img">${p.emoji}</div><div class="body"><div style="font-family:'JetBrains Mono';font-size:.62rem;color:#c9a37e;border:1px solid #3a2110;padding:4px 8px;border-radius:999px;width:fit-content">${p.cat} • Survival OP</div><h3>${p.title}</h3><p class="muted">${p.desc}</p><div class="price">$${pr.toFixed(2)} <small class="muted">${SCOPE==='network'?'Network':MOD}</small></div><button class="buy" data-id="${p.id}">Añadir al carrito</button></div>`;
+  const previewBtn = (p.preview? `<button style="margin-top:6px;padding:8px;border-radius:10px;border:1px solid #3a2110;background:transparent;color:#c9a37e;cursor:pointer" onclick="openPreview('${p.id}')">👁️ Vista previa</button>`:'');
+  d.innerHTML=`<div class="img" style="cursor:pointer" onclick="openPreview('${p.id}')">${p.emoji}</div><div class="body"><div style="font-family:'JetBrains Mono';font-size:.62rem;color:#c9a37e;border:1px solid #3a2110;padding:4px 8px;border-radius:999px;width:fit-content">${p.cat} • Survival OP</div><h3>${p.title}</h3><p class="muted">${p.desc}</p><div class="price">$${pr.toFixed(2)} <small class="muted">${SCOPE==='network'?'Network':MOD}</small></div>${previewBtn}<button class="buy" data-id="${p.id}">Añadir al carrito</button></div>`;
   grid.appendChild(d);
  });
  if(!grid.children.length) grid.innerHTML='<p class="muted">Sin productos en esta combinación.</p>';
@@ -183,7 +206,7 @@ itemsEl.addEventListener('click',e=>{if(e.target.tagName==='BUTTON'){CART.splice
 document.getElementById('cartBtn').onclick=()=>document.getElementById('drawer').classList.add('open');
 document.getElementById('closeCart').onclick=()=>document.getElementById('drawer').classList.remove('open');
 const oc2=document.getElementById('openCart2');if(oc2) oc2.onclick=()=>document.getElementById('drawer').classList.add('open');
-function checkout(url){if(!CART.length)return alert('Carrito vacío');const nick=document.getElementById('checkoutNick').value.trim()||MC_NICK||'';if(!nick)return alert('Escribe tu nick para la entrega');const msg=encodeURIComponent('Hola FoxMC! Quiero comprar ('+SCOPE+'):\n'+CART.map(it=>{const p=PRODUCTS.find(x=>x.id===it.id);return `- ${p.title} [${it.mod}] x${it.qty} ($${(it.pr*it.qty).toFixed(2)})`}).join('\n')+'\nTotal: '+totalEl.textContent+'\nNick: '+nick);window.open(url,'_blank')}
+function checkout(url){if(!CART.length)return alert('Carrito vacío');const nick=document.getElementById('checkoutNick').value.trim()||MC_NICK||'';if(!nick)return alert('Escribe tu nick para la entrega');if(!DC_ID) dcRemind.style.display='block';const msg=encodeURIComponent('Hola FoxMC! Quiero comprar ('+SCOPE+'):\n'+CART.map(it=>{const p=PRODUCTS.find(x=>x.id===it.id);return `- ${p.title} [${it.mod}] x${it.qty} ($${(it.pr*it.qty).toFixed(2)})`}).join('\n')+'\nTotal: '+totalEl.textContent+'\nNick: '+nick+'\nDiscord: '+(DC_ID? DC_NAME+' ('+DC_ID+')':'no vinculado')+'\nModalidad: '+MOD);window.open(url,'_blank')}
 document.getElementById('checkout').onclick=()=>checkout('https://discord.gg/RYbpGdhEa3');
 document.getElementById('payPal').onclick=()=>{if(!CART.length)return alert('Carrito vacío');const amt=totalEl.textContent.replace('$','');window.open('https://www.paypal.com/paypalme/discohikory/'+amt,'_blank'); checkout('https://discord.gg/RYbpGdhEa3')};
 update();
