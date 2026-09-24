@@ -8,130 +8,141 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>var FOXMC_CLOUD={URL:"https://qfyvxwaxbbrtdgvbxxuu.supabase.co",ANON:"sb_publishable_BAxYFsiiM95EKrnvWK_Ldw_KnBhtPjJ",TBL:"fox_"};</script>
 <style>
-:root{--bg:#0b0503;--card:#1a0e06;--card2:#221206;--bor:#3a2110;--txt:#fff3e6;--mut:#c9a37e;--ember:#ff6a00;--glow:0 0 24px rgba(255,106,0,.35)}
-*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{background:var(--bg);color:var(--txt);font-family:'Inter',sans-serif;overflow-x:hidden}
-nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:50;display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(20,10,5,.86);backdrop-filter:blur(18px);border:1px solid var(--bor);border-radius:999px;max-width:97vw;flex-wrap:wrap;justify-content:center}
+*{margin:0;padding:0;box-sizing:border-box}body{background:#050505;color:#fff3e6;font-family:'Inter',sans-serif;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:50;display:flex;align-items:center;justify-content:space-between;width:min(920px,94vw);padding:10px 14px;background:rgba(20,10,5,.92);backdrop-filter:blur(18px);border:1px solid #3a2110;border-radius:999px}
 .brand{display:flex;align-items:center;gap:10px}.mark{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,#ff6a00,#ff3d00);display:grid;place-items:center;font-weight:900}
-.brand b{font-family:'Unbounded';font-size:.82rem}.brand small{display:block;font-family:'JetBrains Mono';font-size:.58rem;letter-spacing:.28em;color:var(--mut)}
-.links{display:flex;gap:6px;align-items:center;flex-wrap:wrap}.links a{color:var(--mut);text-decoration:none;font-weight:700;font-size:.78rem;padding:8px 12px;border-radius:999px}
-.links a:hover{color:#fff;background:rgba(255,106,0,.14)}.cart{position:relative;background:linear-gradient(92deg,#ffb300,#ff6a00);color:#fff;font-weight:900;padding:9px 14px;border-radius:999px;border:none;cursor:pointer}
-.cart span{position:absolute;top:-6px;right:-6px;background:#fff;color:#000;font-size:.7rem;font-weight:900;width:20px;height:20px;display:grid;place-items:center;border-radius:50%}
-.hero{position:relative;min-height:88vh;display:grid;place-items:center;text-align:center;padding:140px 20px 60px;overflow:hidden}
-.hero::before{content:'';position:absolute;inset:-20%;background:radial-gradient(900px 500px at 50% 0%,rgba(255,106,0,.18),transparent 60%)}
-.bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=1600&q=80') center/cover;opacity:.14}
-.hero>div{position:relative;z-index:1;max-width:980px}.badge{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--bor);background:rgba(255,106,0,.08);padding:8px 14px;border-radius:999px;font-family:'JetBrains Mono';font-size:.68rem;letter-spacing:.22em;color:var(--mut)}
-h1{font-family:'Unbounded';font-weight:900;font-size:clamp(2.6rem,8vw,5.6rem);line-height:.92;margin:18px 0}
-.fire{background:linear-gradient(92deg,#ffb300,#ff6a00 40%,#ff3d00);-webkit-background-clip:text;background-clip:text;color:transparent;background-size:220% auto;animation:shine 4s linear infinite}
-@keyframes shine{to{background-position:220% center}}.sub{color:var(--mut);max-width:720px;margin:0 auto 18px;line-height:1.7}
-.btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}.btn{padding:14px 22px;border-radius:14px;font-weight:900;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;border:1px solid transparent}
-.btn-p{background:linear-gradient(92deg,#ffb300,#ff6a00);color:#fff;box-shadow:var(--glow)}.btn-g{background:transparent;color:#fff;border-color:#3a2110}
-#fx{position:absolute;inset:0;pointer-events:none}
-section{max-width:1200px;margin:0 auto;padding:56px 20px;position:relative;z-index:1}
-.kicker{font-family:'JetBrains Mono';font-size:.7rem;letter-spacing:.28em;color:var(--ember);margin-bottom:8px}
-h2{font-family:'Unbounded';font-size:clamp(1.5rem,4vw,2.3rem)}.muted{color:var(--mut);margin:8px 0 18px;line-height:1.6}
-.mods{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.mod{padding:10px 16px;border-radius:999px;border:1px solid var(--bor);background:#140a05;color:var(--mut);font-weight:900;cursor:pointer}
-.mod.active{background:var(--ember);color:#000;border-color:var(--ember)}
-.scope{display:flex;gap:8px;align-items:center;margin-bottom:16px;flex-wrap:wrap;font-size:.85rem}.switch{display:flex;border:1px solid var(--bor);border-radius:999px;overflow:hidden}
-.switch button{padding:8px 14px;border:none;background:transparent;color:var(--mut);font-weight:800;cursor:pointer}.switch button.active{background:#fff;color:#000}
-.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}.chip{padding:8px 14px;border-radius:999px;border:1px solid var(--bor);background:#140a05;color:var(--mut);font-weight:800;cursor:pointer}
+.brand b{font-family:'Unbounded';font-size:.82rem}.brand small{display:block;font-family:'JetBrains Mono';font-size:.58rem;letter-spacing:.28em;color:#c9a37e}
+.links{display:flex;gap:8px;align-items:center}.links a{font-size:.76rem;font-weight:700;color:#c9a37e;padding:8px 12px;border-radius:999px}
+.links a:hover{color:#fff;background:rgba(255,106,0,.14)}
+.cart{position:relative;background:linear-gradient(92deg,#ffb300,#ff6a00);color:#fff;font-weight:900;padding:8px 14px;border-radius:999px;border:none;cursor:pointer}
+.cart span{position:absolute;top:-6px;right:-6px;background:#fff;color:#000;font-size:.7rem;width:20px;height:20px;display:grid;place-items:center;border-radius:50%}
+.wrap{max-width:1280px;margin:0 auto;padding:96px 16px 40px}
+.grid{ display:grid; grid-template-columns:320px 1fr; gap:24px}
+@media(max-width:900px){.grid{grid-template-columns:1fr}}
+.card{background:#141414;border:1px solid rgba(255,255,255,.06);border-radius:1.5rem;padding:22px}
+.products{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+.pcard{background:linear-gradient(180deg,#221206,#1a0e06);border:1px solid #3a2110;border-radius:1.5rem;overflow:hidden;display:flex;flex-direction:column;transition:.25s}
+.pcard:hover{transform:translateY(-4px);border-color:#ff6a00;box-shadow:0 0 24px rgba(255,106,0,.18)}
+.pcard .img{height:148px;display:grid;place-items:center;font-size:3rem;background:radial-gradient(600px 200px at 50% 0%,rgba(255,106,0,.18),transparent 60%),linear-gradient(180deg,#2a1406,#0b0503)}
+.pcard .body{padding:16px;display:flex;flex-direction:column;gap:8px;flex:1}
+.muted{color:#c9a37e;font-size:.85rem;line-height:1.6}
+.chip{padding:8px 14px;border-radius:999px;border:1px solid #3a2110;background:#140a05;color:#c9a37e;font-weight:800;cursor:pointer;font-size:.78rem}
 .chip.active{background:#fff;color:#000}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
-.card{background:linear-gradient(180deg,var(--card2),var(--card));border:1px solid var(--bor);border-radius:22px;overflow:hidden;display:flex;flex-direction:column;transition:.3s}
-.card:hover{transform:translateY(-6px);border-color:var(--ember);box-shadow:var(--glow)}
-.card .img{height:150px;display:grid;place-items:center;font-size:3rem;background:radial-gradient(600px 200px at 50% 0%,rgba(255,106,0,.18),transparent 60%),linear-gradient(180deg,#2a1406,#0b0503)}
-.card .body{padding:16px;display:flex;flex-direction:column;gap:8px;flex:1}.tag{font-family:'JetBrains Mono';font-size:.62rem;letter-spacing:.15em;background:#1c0f06;border:1px solid var(--bor);padding:4px 8px;border-radius:999px;color:var(--mut);width:fit-content}
-.price{font-weight:900;display:flex;gap:8px;align-items:center;flex-wrap:wrap}.price s{color:var(--mut);font-weight:600}
-.buy{margin-top:auto;background:linear-gradient(92deg,#ffb300,#ff6a00);color:#fff;border:none;border-radius:12px;padding:12px;font-weight:900;cursor:pointer}
-.sotm{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-@media(max-width:820px){.sotm{grid-template-columns:1fr}}
-.sotm-card{background:radial-gradient(circle at 50% 0%,#2c1404,#0e0703 70%);border:1px solid #3a2110;border-radius:22px;padding:26px;text-align:center}
+.mod{padding:9px 14px;border-radius:999px;border:1px solid #3a2110;background:#140a05;color:#c9a37e;font-weight:800;cursor:pointer;font-size:.78rem}
+.mod.active{background:#ff6a00;color:#000;border-color:#ff6a00}
+.price{font-weight:900;display:flex;gap:8px;align-items:center}
+.price s{color:#c9a37e}
+.buy{margin-top:auto;background:linear-gradient(92deg,#ffb300,#ff6a00);color:#fff;border:none;border-radius:12px;padding:11px;font-weight:900;cursor:pointer}
+.sotm-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:700px){.sotm-grid{grid-template-columns:1fr}}
+.sotm-card{background:radial-gradient(circle at 50% 0%,#2c1404,#0e0703 70%);border:1px solid #3a2110;border-radius:1.5rem;padding:22px;text-align:center}
 .sotm-card img{width:88px;height:88px;border-radius:16px;background:#000;border:1px solid #3a2110;image-rendering:pixelated}
 .dc{width:88px;height:88px;border-radius:50%;padding:4px;background:conic-gradient(#ffb300,#ff3d00,#5a1c00,#ffb300)} .dc img{width:100%;height:100%;border-radius:50%;background:#111}
-.board{display:grid;gap:8px;max-height:340px;overflow:auto}.row{display:flex;align-items:center;gap:10px;background:#000;border:1px solid var(--bor);border-radius:12px;padding:10px 12px}
+.board{display:grid;gap:8px;max-height:320px;overflow:auto}
+.row{display:flex;align-items:center;gap:10px;background:#000;border:1px solid #3a2110;border-radius:12px;padding:10px 12px}
 .row b{margin-left:auto;background:linear-gradient(92deg,#ffb300,#ff6a00);color:#fff;border-radius:999px;padding:2px 10px;font-size:.78rem}
-.pay{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.pay span{border:1px solid var(--bor);background:#140a05;padding:8px 12px;border-radius:12px;font-weight:800;font-size:.85rem}
-.drawer{position:fixed;top:0;right:0;bottom:0;width:min(420px,92vw);background:#100802;border-left:1px solid var(--bor);transform:translateX(100%);transition:.3s;z-index:60;display:flex;flex-direction:column}
-.drawer.open{transform:none}.drawer head{padding:18px;border-bottom:1px solid var(--bor);display:flex;justify-content:space-between;align-items:center}
-.items{flex:1;overflow:auto;padding:16px;display:grid;gap:10px}.total{border-top:1px solid var(--bor);padding:16px;display:grid;gap:10px}
+.payicons{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.payicons span{border:1px solid #3a2110;background:#140a05;padding:8px 12px;border-radius:999px;font-weight:800;font-size:.78rem}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(420px,92vw);background:#100802;border-left:1px solid #3a2110;transform:translateX(100%);transition:.3s;z-index:60;display:flex;flex-direction:column}
+.drawer.open{transform:none}.drawer head{padding:18px;border-bottom:1px solid #3a2110;display:flex;justify-content:space-between;align-items:center}
+.items{flex:1;overflow:auto;padding:16px;display:grid;gap:10px}
+.total{border-top:1px solid #3a2110;padding:16px;display:grid;gap:10px}
 .check{width:100%;background:linear-gradient(92deg,#ffb300,#ff6a00);color:#fff;border:none;border-radius:12px;padding:14px;font-weight:900;cursor:pointer}
-footer{border-top:1px solid var(--bor);padding:28px 20px;text-align:center;color:#8a6742}
-.marquee{border-top:1px solid var(--bor);border-bottom:1px solid var(--bor);background:#0e0703;white-space:nowrap;overflow:hidden;padding:12px 0}
-.track{display:inline-block;animation:mar 26s linear infinite;font-family:'Unbounded';letter-spacing:.16em;color:#8a6742}.track b{color:var(--ember)}@keyframes mar{to{transform:translateX(-50%)}}
+footer{border-top:1px solid #3a2110;padding:28px 20px;text-align:center;color:#8a6742}
 </style>
 </head>
 <body>
 <nav>
   <div class="brand"><div class="mark">🦊</div><div><b>FOXMC NETWORK</b><small>TIENDA OFICIAL</small></div></div>
-  <div class="links"><a href="#productos">Productos</a><a href="#sotm">Staff del Mes</a><a href="https://discord.gg/RYbpGdhEa3" target="_blank">Discord</a><button class="cart" id="cartBtn">🛒 Carrito <span id="cartCount">0</span></button></div>
+  <div class="links"><a href="#productos">Productos</a><a href="#sotm">Staff del Mes</a><a href="https://discord.gg/RYbpGdhEa3" target="_blank">Discord</a><button class="cart" id="cartBtn">🛒 <span id="cartCount">0</span></button></div>
 </nav>
-<div class="hero"><div class="bg"></div><canvas id="fx"></canvas>
-  <div>
-    <div class="badge">🦊 FoxMC Network • Tienda Oficial</div>
-    <h1><span class="fire">FOXMC</span> TIENDA</h1>
-    <p class="sub">Survival OP — rangos, llaves verdes, coins y kits. Elige <b>Solo Survival</b> o <b>Network</b> (+35% para toda la red).</p>
-    <div class="btns"><a class="btn btn-p" href="#productos">🛍️ Ver productos</a><a class="btn btn-g" href="https://discord.gg/RYbpGdhEa3" target="_blank">💎 Discord</a></div>
+
+<div style="background:radial-gradient(circle at top,#2a0b0b 0%,#141414 42%,#0a0a0a 100%);border-bottom:1px solid rgba(255,255,255,.05)">
+  <div class="wrap" style="padding-bottom:24px">
+    <div style="background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.06);border-radius:2rem;padding:28px;display:grid;grid-template-columns:1.1fr .9fr;gap:22px;align-items:center">
+      <div>
+        <div style="display:inline-flex;gap:8px;align-items:center;border:1px solid rgba(255,106,0,.25);background:rgba(255,106,0,.08);padding:6px 12px;border-radius:999px;font-family:'JetBrains Mono';font-size:.68rem;letter-spacing:.2em">🦊 FoxMC Network • Tienda Oficial</div>
+        <h1 style="font-family:'Unbounded';font-size:clamp(2rem,5vw,3.2rem);margin:12px 0 8px;line-height:1">TIENDA <span style="background:linear-gradient(92deg,#ffb300,#ff3d00);-webkit-background-clip:text;background-clip:text;color:transparent">OFICIAL</span></h1>
+        <p class="muted">Rangos zorro, llaves verdes, coins y kits — por modalidad o para toda la red.</p>
+        <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap"><a href="#productos" class="cart" style="text-decoration:none">🛍️ Ver productos</a><a href="https://discord.gg/RYbpGdhEa3" target="_blank" style="border:1px solid #3a2110;padding:10px 14px;border-radius:999px;font-weight:800">💎 Discord</a></div>
+      </div>
+      <div style="background:#0f0f12;border:1px solid rgba(255,255,255,.06);border-radius:1.5rem;padding:18px">
+        <div style="font-family:'JetBrains Mono';font-size:.7rem;letter-spacing:.2em;color:#c9a37e">VENTAJA NETWORK</div>
+        <div style="font-size:1.1rem;font-weight:900;margin:6px 0">Un pago, <span style="color:#ff6a00">toda la red</span></div>
+        <p class="muted" style="margin:0">Network cuesta +35% y se activa donde esté disponible.</p>
+        <div class="payicons"><span>PayPal</span><span>MercadoPago</span><span>Stripe</span><span>Crypto</span></div>
+      </div>
+    </div>
   </div>
 </div>
-<div class="marquee"><div class="track" id="marquee"></div></div>
 
-<section id="productos">
-  <div class="kicker">Catálogo</div>
-  <h2>Elige tu poder — FoxMC</h2>
-  <p class="muted">Compras verificadas por Discord. Entrega automática al entrar.</p>
-  <div class="mods" id="mods">
-    <button class="mod active" data-m="survival">Survival OP</button>
-    <button class="mod" data-m="network">Network (toda la red +35%)</button>
-  </div>
-  <div class="scope">
-    <div class="switch" id="scope"><button class="active" data-s="modal">Solo modalidad</button><button data-s="network">Network</button></div>
-    <span class="muted" style="margin:0">Network = en todos los mundos donde esté disponible.</span>
-  </div>
-  <div class="filters" id="filters">
-    <button class="chip active" data-f="all">Todo</button>
-    <button class="chip" data-f="rango-p">Rangos Perm.</button>
-    <button class="chip" data-f="rango-t">Rangos Temp. (30d)</button>
-    <button class="chip" data-f="cosm">Cosméticos</button>
-    <button class="chip" data-f="cmd">Comandos</button>
-    <button class="chip" data-f="kits">Kits</button>
-    <button class="chip" data-f="coins">Coins/Llaves</button>
-  </div>
-  <div class="grid" id="grid"></div>
-  <div class="pay"><span>💳 PayPal</span><span>💠 MercadoPago</span><span>💳 Stripe</span><span>₿ Crypto</span><span>🏦 Transferencia</span></div>
-</section>
-
-<section id="sotm">
-  <div class="kicker">Reconocimiento</div>
-  <h2>Staff del Mes — FoxMC</h2>
-  <p class="muted">Mismo bot y base de datos de la Staff Page. En vivo.</p>
-  <div class="sotm">
-    <div class="sotm-card">
-      <div style="display:flex;justify-content:center;gap:18px;margin:10px 0">
-        <div><img id="sSkin" src="https://minotar.net/helm/MHF_Steve/100.png"><div class="muted" style="font-size:.7rem;margin-top:6px">Minecraft</div></div>
-        <div><div class="dc"><img id="sAv" src="https://cdn.discordapp.com/embed/avatars/0.png"></div><div class="muted" style="font-size:.7rem;margin-top:6px">Discord</div></div>
+<div class="wrap" style="padding-top:24px">
+  <div class="grid">
+    <div style="display:grid;gap:16px;align-content:start">
+      <div class="card">
+        <h3>🔐 Login</h3>
+        <p class="muted">Usa tu nick de Minecraft antes de comprar.</p>
+        <div style="display:flex;gap:8px;margin-top:8px"><input id="mcNick" placeholder="Tu nick" style="flex:1;background:#0c0c10;border:1px solid #3a2110;border-radius:12px;padding:10px;color:#fff"><button id="loginBtn" class="chip active">Entrar</button></div>
+        <p class="muted" id="loginMsg" style="margin:8px 0 0"></p>
       </div>
-      <h3 id="sNick">—</h3><div class="muted" id="sDc">—</div>
-      <div style="margin-top:10px"><b id="sPts" style="font-size:1.8rem">0</b> puntos</div>
-      <div class="muted" id="sMonth">—</div>
+      <div class="card">
+        <h3>💬 ¿Necesitas ayuda?</h3>
+        <p class="muted">Soporte de pagos y entregas en Discord.</p>
+        <a href="https://discord.gg/RYbpGdhEa3" target="_blank" style="margin-top:8px;display:inline-flex;gap:8px;align-items:center;background:#5865F2;color:#fff;padding:10px 14px;border-radius:12px;font-weight:900">Join Discord →</a>
+        <div class="payicons"><span>PayPal</span><span>MercadoPago</span><span>Stripe</span></div>
+      </div>
+      <div class="card">
+        <h3>🛒 Bolsa</h3>
+        <div id="miniCart" style="display:grid;gap:8px;margin-top:8px"></div>
+        <div style="display:flex;justify-content:space-between;font-weight:900;margin-top:8px"><span>Total</span><span id="miniTotal">$0.00</span></div>
+        <button id="openCart2" class="chip active" style="margin-top:8px;width:100%">Abrir carrito</button>
+      </div>
+      <div class="card" id="sotmCard">
+        <h3>⭐ Staff del Mes — FoxMC</h3>
+        <p class="muted">Mismo bot y base de datos de la Staff Page.</p>
+        <div style="display:flex;justify-content:center;gap:14px;margin:12px 0">
+          <div><img id="sSkin" src="https://minotar.net/helm/MHF_Steve/100.png"><div class="muted" style="font-size:.7rem">Minecraft</div></div>
+          <div><div class="dc"><img id="sAv" src="https://cdn.discordapp.com/embed/avatars/0.png"></div><div class="muted" style="font-size:.7rem">Discord</div></div>
+        </div>
+        <div style="text-align:center"><b id="sNick">—</b><div class="muted" id="sDc">—</div><div style="margin-top:8px"><b id="sPts" style="font-size:1.6rem">0</b> puntos</div><div class="muted" id="sMonth">—</div></div>
+        <div class="board" id="board" style="margin-top:12px"></div>
+      </div>
     </div>
-    <div class="sotm-card"><h3>🏆 Tabla de puntos</h3><p class="muted">Actividad del equipo en vivo.</p><div id="board" class="board"></div></div>
+    <div>
+      <div id="mods" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px">
+        <button class="mod active" data-m="survival">Survival OP</button>
+        <button class="mod" data-m="network">Network (+35%)</button>
+      </div>
+      <div id="filters" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
+        <button class="chip active" data-f="all">Todo</button>
+        <button class="chip" data-f="rango-p">Rangos Perm.</button>
+        <button class="chip" data-f="rango-t">Rangos Temp.</button>
+        <button class="chip" data-f="cosm">Cosméticos</button>
+        <button class="chip" data-f="cmd">Comandos</button>
+        <button class="chip" data-f="kits">Kits</button>
+        <button class="chip" data-f="coins">Coins/Llaves</button>
+      </div>
+      <div class="products" id="grid"></div>
+    </div>
   </div>
-</section>
+</div>
 
 <aside class="drawer" id="drawer">
   <head><b>🛒 Carrito</b><button id="closeCart" class="chip">Cerrar</button></head>
   <div class="items" id="cartItems"></div>
   <div class="total"><div style="display:flex;justify-content:space-between;font-weight:900"><span>Total</span><span id="cartTotal">$0.00</span></div>
-  <div class="pay" style="margin:0"><span>PayPal</span><span>MercadoPago</span><span>Stripe</span></div>
+  <div class="payicons"><span>PayPal</span><span>MercadoPago</span><span>Stripe</span></div>
+  <input id="checkoutNick" placeholder="Tu nick para entrega" style="background:#0c0c10;border:1px solid #3a2110;border-radius:12px;padding:10px;color:#fff">
   <button class="check" id="checkout">Pagar por Discord</button><button class="check" id="payPal" style="background:#003087">Pagar con PayPal</button></div>
 </aside>
 <footer>© 2026 FoxMC Network • Tienda Oficial • © Discohikorybrs - Daniel Esteban Vera Fernandez</footer>
 
 <script>
-const m='FOXMC <b>✦</b> TIENDA <b>✦</b> SURVIVAL OP <b>✦</b> NETWORK <b>✦</b> ';
-document.getElementById('marquee').innerHTML=(m+m+m+m);
-const cv=document.getElementById('fx'),ctx=cv.getContext('2d');let w,h;function rs(){w=cv.width=innerWidth;h=cv.height=innerHeight}rs();addEventListener('resize',rs);
-let P=[];for(let i=0;i<70;i++)P.push({x:Math.random()*w,y:Math.random()*h+200,vy:-(Math.random()*.6+.2),vx:(Math.random()-.5)*.4,r:Math.random()*1.6+.6,a:Math.random()*.5+.2});
-(function loop(){ctx.clearRect(0,0,w,h);P.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.y<-10){p.y=h+10;p.x=Math.random()*w}ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,7);ctx.fillStyle=`rgba(255,106,0,${p.a})`;ctx.fill()});requestAnimationFrame(loop)})();
+const nickInput=document.getElementById('mcNick'),loginBtn=document.getElementById('loginBtn'),loginMsg=document.getElementById('loginMsg');
+let MC_NICK=localStorage.getItem('fox-mc')||'';
+if(MC_NICK){nickInput.value=MC_NICK;loginMsg.textContent='Logueado como '+MC_NICK}
+loginBtn.onclick=()=>{const v=nickInput.value.trim();if(!v)return loginMsg.textContent='Escribe tu nick';localStorage.setItem('fox-mc',v);MC_NICK=v;loginMsg.textContent='✔ Logueado como '+v;document.getElementById('checkoutNick').value=v};
+
 const PRODUCTS=[
  {id:'zorro-p',cat:'rango-p',mods:['survival'],emoji:'🦊',title:'ZORRO Permanente',price:{survival:5.99},desc:'Tag ZORRO + kit zorro + 3 homes'},
  {id:'alpha-p',cat:'rango-p',mods:['survival'],emoji:'⭐',title:'ALPHA Permanente',price:{survival:12.99},desc:'ZORRO + fly + partículas'},
@@ -154,31 +165,29 @@ function render(){
  grid.innerHTML='';
  PRODUCTS.filter(p=> (p.mods.includes(MOD)||MOD==='network') && (CAT==='all'||p.cat===CAT)).forEach(p=>{
   const pr=priceOf(p);
-  const d=document.createElement('div');d.className='card';
-  d.innerHTML=`<div class="img">${p.emoji}</div><div class="body"><div class="tag">${p.cat} • Survival OP</div><h3>${p.title}</h3><p class="muted">${p.desc}</p><div class="price">$${pr.toFixed(2)} <small class="muted">${SCOPE==='network'?'Network':MOD}</small></div><button class="buy" data-id="${p.id}">Añadir al carrito</button></div>`;
+  const d=document.createElement('div');d.className='pcard';
+  d.innerHTML=`<div class="img">${p.emoji}</div><div class="body"><div style="font-family:'JetBrains Mono';font-size:.62rem;color:#c9a37e;border:1px solid #3a2110;padding:4px 8px;border-radius:999px;width:fit-content">${p.cat} • Survival OP</div><h3>${p.title}</h3><p class="muted">${p.desc}</p><div class="price">$${pr.toFixed(2)} <small class="muted">${SCOPE==='network'?'Network':MOD}</small></div><button class="buy" data-id="${p.id}">Añadir al carrito</button></div>`;
   grid.appendChild(d);
  });
  if(!grid.children.length) grid.innerHTML='<p class="muted">Sin productos en esta combinación.</p>';
 }
 render();
-document.getElementById('mods').addEventListener('click',e=>{if(e.target.classList.contains('mod')){document.querySelectorAll('.mod').forEach(x=>x.classList.remove('active'));e.target.classList.add('active');MOD=e.target.dataset.m;render()}});
-document.getElementById('filters').addEventListener('click',e=>{if(e.target.classList.contains('chip')){document.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));e.target.classList.add('active');CAT=e.target.dataset.f;render()}});
-document.getElementById('scope').addEventListener('click',e=>{if(e.target.dataset.s){document.querySelectorAll('#scope button').forEach(x=>x.classList.remove('active'));e.target.classList.add('active');SCOPE=e.target.dataset.s;render();update()}});
+document.getElementById('mods').addEventListener('click',e=>{if(e.target.classList.contains('mod')){document.querySelectorAll('#mods .mod').forEach(x=>x.classList.remove('active'));e.target.classList.add('active');const m=e.target.dataset.m;if(m==='network'){SCOPE='network';MOD='survival'}else{SCOPE='modal';MOD=m}render();update()}});
+document.getElementById('filters').addEventListener('click',e=>{if(e.target.classList.contains('chip')){document.querySelectorAll('#filters .chip').forEach(x=>x.classList.remove('active'));e.target.classList.add('active');CAT=e.target.dataset.f;render()}});
 let CART=JSON.parse(localStorage.getItem('fox-cart')||'[]');
-const countEl=document.getElementById('cartCount'),itemsEl=document.getElementById('cartItems'),totalEl=document.getElementById('cartTotal');
+const countEl=document.getElementById('cartCount'),itemsEl=document.getElementById('cartItems'),totalEl=document.getElementById('cartTotal'),mini=document.getElementById('miniCart'),miniTotal=document.getElementById('miniTotal');
 function save(){localStorage.setItem('fox-cart',JSON.stringify(CART))}
-function update(){countEl.textContent=CART.reduce((a,b)=>a+b.qty,0);let t=0;itemsEl.innerHTML='';CART.forEach((it,i)=>{const p=PRODUCTS.find(x=>x.id===it.id);const pr=priceOf({...p,price:{[it.mod]:p.price[it.mod]||Object.values(p.price)[0]}}); // recalc per item mod
-  // simpler: stored pr at add time
-  const storedPr=it.pr||priceOf(p); t+=storedPr*it.qty;const row=document.createElement('div');row.className='row';row.innerHTML=`<span>${p.emoji} ${p.title} <small class="muted">${it.scope==='network'?'Network':it.mod}</small> x${it.qty}</span><b>$${(storedPr*it.qty).toFixed(2)}</b> <button data-i="${i}" style="margin-left:6px">✕</button>`;itemsEl.appendChild(row)});totalEl.textContent='$'+t.toFixed(2);save()}
-grid.addEventListener('click',e=>{if(e.target.classList.contains('buy')){const id=e.target.dataset.id;const mod=MOD;const pr=priceOf(PRODUCTS.find(x=>x.id===id));let f=CART.find(x=>x.id===id && x.scope===SCOPE && x.mod===mod);if(f)f.qty++;else CART.push({id,scope:SCOPE,mod,pr,qty:1});update()}});
+function update(){countEl.textContent=CART.reduce((a,b)=>a+b.qty,0);let t=0;itemsEl.innerHTML='';CART.forEach((it,i)=>{const p=PRODUCTS.find(x=>x.id===it.id);const pr=it.pr; t+=pr*it.qty;const row=document.createElement('div');row.className='row';row.innerHTML=`<span>${p.emoji} ${p.title} <small class="muted">${it.scope==='network'?'Network':it.mod}</small> x${it.qty}</span><b>$${(pr*it.qty).toFixed(2)}</b> <button data-i="${i}" style="margin-left:6px">✕</button>`;itemsEl.appendChild(row)});totalEl.textContent='$'+t.toFixed(2);if(mini&&miniTotal){mini.innerHTML=CART.map(it=>{const p=PRODUCTS.find(x=>x.id===it.id);return `<div class="row" style="font-size:.82rem"><span>${p.emoji} ${p.title} x${it.qty}</span><b>$${(it.pr*it.qty).toFixed(2)}</b></div>`}).join('')||'';miniTotal.textContent='$'+t.toFixed(2)}save()}
+grid.addEventListener('click',e=>{if(e.target.classList.contains('buy')){const id=e.target.dataset.id;const p=PRODUCTS.find(x=>x.id===id);const mod=MOD;const pr=priceOf(p);let f=CART.find(x=>x.id===id && x.scope===SCOPE && x.mod===mod);if(f)f.qty++;else CART.push({id,scope:SCOPE,mod,pr,qty:1});update()}});
 itemsEl.addEventListener('click',e=>{if(e.target.tagName==='BUTTON'){CART.splice(+e.target.dataset.i,1);update()}});
 document.getElementById('cartBtn').onclick=()=>document.getElementById('drawer').classList.add('open');
 document.getElementById('closeCart').onclick=()=>document.getElementById('drawer').classList.remove('open');
-function checkout(url){if(!CART.length)return alert('Carrito vacío');const msg=encodeURIComponent('Hola FoxMC! Quiero comprar ('+SCOPE+'):\n'+CART.map(it=>{const p=PRODUCTS.find(x=>x.id===it.id);return `- ${p.title} [${it.mod}] x${it.qty} ($${(it.pr*it.qty).toFixed(2)})`}).join('\n')+'\nTotal: '+totalEl.textContent+'\nNick: ');window.open(url,'_blank')}
+const oc2=document.getElementById('openCart2');if(oc2) oc2.onclick=()=>document.getElementById('drawer').classList.add('open');
+function checkout(url){if(!CART.length)return alert('Carrito vacío');const nick=document.getElementById('checkoutNick').value.trim()||MC_NICK||'';if(!nick)return alert('Escribe tu nick para la entrega');const msg=encodeURIComponent('Hola FoxMC! Quiero comprar ('+SCOPE+'):\n'+CART.map(it=>{const p=PRODUCTS.find(x=>x.id===it.id);return `- ${p.title} [${it.mod}] x${it.qty} ($${(it.pr*it.qty).toFixed(2)})`}).join('\n')+'\nTotal: '+totalEl.textContent+'\nNick: '+nick);window.open(url,'_blank')}
 document.getElementById('checkout').onclick=()=>checkout('https://discord.gg/RYbpGdhEa3');
 document.getElementById('payPal').onclick=()=>{if(!CART.length)return alert('Carrito vacío');const amt=totalEl.textContent.replace('$','');window.open('https://www.paypal.com/paypalme/discohikory/'+amt,'_blank'); checkout('https://discord.gg/RYbpGdhEa3')};
 update();
-// Supabase Staff del Mes — FoxMC (filtered)
+// Supabase Staff del Mes — FoxMC (filtrado: solo MC válido)
 (async()=>{
  try{
   const supa=supabase.createClient(FOXMC_CLOUD.URL,FOXMC_CLOUD.ANON);
