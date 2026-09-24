@@ -120,10 +120,11 @@ footer{border-top:1px solid #3a2110;padding:28px 20px;text-align:center;color:#8
         <button class="chip active" data-f="all">Todo</button>
         <button class="chip" data-f="rango-p">Rangos Perm.</button>
         <button class="chip" data-f="rango-t">Rangos Temp.</button>
+        <button class="chip" data-f="llaves">Llaves</button>
+        <button class="chip" data-f="coins">Coins</button>
         <button class="chip" data-f="cosm">Cosméticos</button>
         <button class="chip" data-f="cmd">Comandos</button>
         <button class="chip" data-f="kits">Kits</button>
-        <button class="chip" data-f="coins">Coins/Llaves</button>
       </div>
       <div class="products" id="grid"></div>
     </div>
@@ -167,19 +168,25 @@ window.openPreview=(id)=>{const p=PRODUCTS.find(x=>x.id===id);if(!p)return;const
 window.closePreview=()=>document.getElementById('preview').style.display='none';
 
 const PRODUCTS=[
- {id:'zorro-p',cat:'rango-p',mods:['survival'],emoji:'🦊',title:'ZORRO Permanente',price:{survival:5.99},desc:'Tag ZORRO + kit zorro + 3 homes',preview:'🦊 ZORRO — naranja fuego'},
- {id:'alpha-p',cat:'rango-p',mods:['survival'],emoji:'⭐',title:'ALPHA Permanente',price:{survival:12.99},desc:'ZORRO + fly + partículas',preview:'⭐ ALPHA — estrella'},
- {id:'leyenda-p',cat:'rango-p',mods:['survival'],emoji:'👑',title:'LEYENDA Permanente',price:{survival:22.99},desc:'ALPHA + kits leyenda + prioridad',preview:'👑 LEYENDA — máximo'},
- {id:'zorro-t',cat:'rango-t',mods:['survival'],emoji:'⏳',title:'ZORRO 30 días',price:{survival:2.99},desc:'Prueba ZORRO por 30 días'},
- {id:'alpha-t',cat:'rango-t',mods:['survival'],emoji:'⏳',title:'ALPHA 30 días',price:{survival:5.99},desc:'Prueba ALPHA por 30 días'},
- {id:'tag-fox',cat:'cosm',mods:['survival'],emoji:'🦊',title:'Tag ZORRO (exclusivo)',price:{survival:2.49},desc:'Exclusivo Fox — eventos',preview:'🦊 Tag ZORRO'},
+ // Rangos permanentes FoxMC (mayor → menor) — poca diferencia
+ {id:'foxen-p',cat:'rango-p',mods:['survival'],emoji:'🦊',title:'FOXEN',price:{survival:14.99},desc:'Rango máximo Fox — tag exclusivo + kit Foxen',preview:'🦊 FOXEN — cima'},
+ {id:'vulkor-p',cat:'rango-p',mods:['survival'],emoji:'🐺',title:'VULKOR',price:{survival:11.99},desc:'Debajo de Foxen — kit Vulkor',preview:'🐺 VULKOR — manada'},
+ {id:'fenrix-p',cat:'rango-p',mods:['survival'],emoji:'🦊',title:'FENRIX',price:{survival:9.49},desc:'Rango medio-alto — Fenrix',preview:'🦊 FENRIX — astuto'},
+ {id:'zarfox-p',cat:'rango-p',mods:['survival'],emoji:'🦊',title:'ZARFOX',price:{survival:7.49},desc:'Rango medio — Zarfox',preview:'🦊 ZARFOX — veloz'},
+ {id:'fokar-p',cat:'rango-p',mods:['survival'],emoji:'🦊',title:'FOKAR',price:{survival:4.99},desc:'Rango inicial Fox',preview:'🦊 FOKAR — inicio'},
+ // Temporales 30d (precio reducido, poca diferencia)
+ {id:'foxen-t',cat:'rango-t',mods:['survival'],emoji:'⏳',title:'FOXEN 30 días',price:{survival:6.49},desc:'Prueba Foxen 30 días'},
+ {id:'vulkor-t',cat:'rango-t',mods:['survival'],emoji:'⏳',title:'VULKOR 30 días',price:{survival:5.49},desc:'Prueba Vulkor 30 días'},
+ {id:'fenrix-t',cat:'rango-t',mods:['survival'],emoji:'⏳',title:'FENRIX 30 días',price:{survival:4.49},desc:'Prueba Fenrix 30 días'},
+ {id:'zarfox-t',cat:'rango-t',mods:['survival'],emoji:'⏳',title:'ZARFOX 30 días',price:{survival:3.49},desc:'Prueba Zarfox 30 días'},
+ {id:'fokar-t',cat:'rango-t',mods:['survival'],emoji:'⏳',title:'FOKAR 30 días',price:{survival:2.49},desc:'Prueba Fokar 30 días'},
  {id:'trail',cat:'cosm',mods:['survival'],emoji:'✨',title:'Partículas / Trail',price:{survival:3.49},desc:'Efectos al caminar',preview:'✨ Trail corazones'},
  {id:'fly',cat:'cmd',mods:['survival'],emoji:'🪽',title:'/fly',price:{survival:4.99},desc:'Vuelo en tu mundo'},
  {id:'heal',cat:'cmd',mods:['survival'],emoji:'❤️',title:'/heal + /feed',price:{survival:2.99},desc:'Cura y comida'},
- {id:'kit-fox',cat:'kits',mods:['survival'],emoji:'🎒',title:'Kit Zorro',price:{survival:2.99},desc:'Starter zorro'},
- {id:'kit-pvp',cat:'kits',mods:['survival'],emoji:'⚔️',title:'Kit PvP Alpha',price:{survival:7.99},desc:'Set PvP + perlas'},
+ {id:'kit-fox',cat:'kits',mods:['survival'],emoji:'🎒',title:'Kit Zorro',price:{survival:2.99},desc:'Starter zorro',preview:'🎒 Kit Zorro'},
+ {id:'kit-pvp',cat:'kits',mods:['survival'],emoji:'⚔️',title:'Kit PvP Alpha',price:{survival:7.99},desc:'Set PvP + perlas',preview:'⚔️ Kit PvP'},
  {id:'coins10k',cat:'coins',mods:['survival'],emoji:'🪙',title:'10.000 Coins',price:{survival:4.99},desc:'Moneda interna'},
- {id:'keys5',cat:'coins',mods:['survival'],emoji:'🗝️',title:'5 Llaves Verdes',price:{survival:6.99},desc:'Cofres verdes'},
+ {id:'keys5',cat:'llaves',mods:['survival'],emoji:'🗝️',title:'5 Llaves Verdes',price:{survival:6.99},desc:'Cofres verdes'},
 ];
 let MOD='survival', CAT='all', SCOPE='modal';
 function priceOf(p){let base=p.price[MOD]??Object.values(p.price)[0];if(SCOPE==='network')base=Math.round(base*1.35*100)/100;return base}
